@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]
+then
+	echo "Ghostscript wrapper to compress pdf files."
+	echo
+	echo "Usage: pdfcompress input.pdf output.pdf"
+	exit 0
+fi
+
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook \
+	-dNOPAUSE -dQUIET -dBATCH -sOutputFile="$2" "$1"
