@@ -5,5 +5,8 @@ Compress pdf files using the "ebook" option from ghostscript.
 
 Ghostscript wrapper to compress pdf files.
 
-Usage: pdfcompress input.pdf output.pdf
+Usage: pdfcompress input.pdf [output.pdf]
+
+Notes:
+output.pdf defaults to "input (compressed).pdf".
 ```

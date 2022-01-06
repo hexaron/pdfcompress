@@ -4,8 +4,20 @@ if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]
 then
 	echo "Ghostscript wrapper to compress pdf files."
 	echo
-	echo "Usage: pdfcompress input.pdf output.pdf"
+	echo "Usage: pdfcompress input.pdf [output.pdf]"
+	echo
+	echo "Notes:"
+	echo "output.pdf defaults to \"input (compressed).pdf\"."
 	exit 0
 fi
 
-gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$2" "$1"
+
+if [[ -z "$2" ]]
+then
+	# Remove last 4 characters (i.e. ".pdf") and append " (compressed).pdf".
+	OutputFile="${1:0: -4} (compressed).pdf"
+else
+	OutputFile="$2"
+fi
+
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$OutputFile" "$1"
